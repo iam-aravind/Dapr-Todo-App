@@ -26,7 +26,7 @@ namespace TodoApp.Frontend.Controllers
             HttpClient client = new HttpClient();
             var re = await client.GetAsync($"http://localhost:{port}/v1.0/invoke/todo-back/method/todos");
             var text = await re.Content.ReadAsStringAsync();
-            ViewBag.Text = text + "," + re.StatusCode + ",";
+            ViewBag.Todos = JsonConvert.DeserializeObject<List<Todo>>(text);
             return View();
         }
 
